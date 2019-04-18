@@ -1,0 +1,215 @@
+<template>
+	<header>
+		<ul>
+			<li v-for="item in arr" :key="item.name">
+				<router-link :to="item.path">{{ item.name}}</router-link></li>
+		</ul>
+	</header>
+</template>
+<script type="text/javascript">
+	export default{
+		data(){
+			return {
+				linkHome:"/",
+				arr:[{name:'主页',path:"/"},
+				{name:'菜单',path:"/Menu"},
+				{name:'管理',path:"/Admin"},
+				{name:'关于我们',path:"/about/About"},
+				{name:'登陆',path:"/Login"},
+				{name:'注册',path:"/Register"}]
+			}
+		}
+	}
+</script>
+<style scoped>
+	ul{
+		display: flex; 
+		height:44px;
+		line-height: 44px;
+		background-color: #E91E63;		
+	}
+	
+	ul li {
+		flex:2;
+		text-align: center; 
+		list-style-type: none;
+		color: #fff;
+	}
+	a{
+		color: #fff;
+		text-decoration: none;
+	}
+	
+</style>
+
+
+
+
+
+
+<template>
+	<div class="container">
+		<div class="center">
+			<div class="center_left">
+				<div class="center_left_up node_h">eeee{{getView}}</div>
+				<div class="center_left_down node_h">wwww</div>
+			</div>
+			<div class="center_center">asdasd</div>
+			<div class="center_right">
+				<div class="center_right_up node_h" >qqqq</div>
+				<div class="center_right_down node_h">rrrr</div>
+			</div>
+		</div> 
+		<div id="footerId">
+			aasasasasd
+		</div>
+	</div>
+	<!-- <button @click="routerTo">点击获取路由参数</button> -->
+</template>
+
+<script type="text/javascript">
+	export default{
+		name:"muneTimes",
+		data(){
+			return {
+				arr:['第一个','第二个','第三个','第四个','第五个','第六个','第七个'],
+				getView:"",
+				nodeHeight:""
+			}
+		},
+		methods:{
+		    routerTo(){
+		   	    this.$router.push({ name:'Admin', params: { userId: 123 }});
+		    },
+		    getViewRegion(){
+		  //   	const that = this;
+		  //   	let getView=document.documentElement.clientHeight||document.body.clientHeight;
+		  //   	let nodeHeight=getView/2;
+		  //   	let getViewCenter=getView-44-100;
+		  //   	console.log(getView);
+	   //  		console.log(nodeHeight);
+				// console.log(getViewCenter);
+		    	//this.getView=getView+"px";
+		    	//this.nodeHeight=nodeHeight;
+		    }
+		},
+		created(){
+			this.getViewRegion();
+		},
+		mounted (){
+			/*const that = this;
+		    window.onresize = () => {
+		      that.getViewRegion();
+		    }*/
+		}
+	}
+</script>
+<style scoped>
+	*{
+		margin: 0;
+		padding: 0;
+		box-sizing: border-box;
+	}
+	.center{
+		display: flex;
+		width: 100%;
+		height: 600px;
+		color:#fff;
+	}
+
+	.center_left{
+		height:100%;
+		flex:1;
+		/*width:25%;*/
+	}
+
+	.center_center{
+		height:100%;
+		flex:2;
+		/* width:50%; */
+		background-color: red;
+		text-align: center;
+	}
+
+	.center_right{
+		flex:1;
+		height:100%;
+		/* width:25%; */
+	}
+
+	.center_left_up,.center_right_up{
+		height: 50%;
+		width: 100%;
+		text-align: center; 
+		overflow-wrap: break-word;
+		text-overflow: ellipsis;
+		background-color: blue;
+	}
+
+	.center_left_down,.center_right_down{
+		height: 50%;
+		width: 100%;
+		text-align: center; 
+		overflow-wrap: break-word; 
+		text-overflow: ellipsis;
+		background-color: #9C27B0;
+	}
+	
+	#footerId{
+		width: 100%;
+		height: 100px;
+		font-size: 22px;
+		background-color: #4e4e4e;
+		color:#fff;
+		line-height: 100px;
+		text-align: center;
+	}
+</style>
+
+
+
+
+app.vue 
+<template>
+  <div id="app">
+      <div class="container">
+        <appHeader></appHeader>
+      </div>
+      <div class="container">
+        <router-view> </router-view> 
+      </div>
+      <br>
+       <div class="container">
+        <div class="row">
+          <div class="col-sm-12 col-md-4">
+            <router-view name="orderingGuide"></router-view>  
+          </div>
+          <div class="col-sm-12 col-md-4">
+            <router-view name="delivery"></router-view> 
+          </div>
+          <div class="col-sm-12 col-md-4">
+            <router-view name="history"></router-view>  
+          </div>
+        </div>
+      </div> 
+  </div>
+</template>
+
+<script>
+
+import Header from "./components/Header";
+
+export default {
+    components:{
+      appHeader:Header
+    }
+}
+</script>
+
+<style>
+  *{
+    margin: 0;
+    padding: 0;
+    /* box-sizing: border-box; */
+  }
+</style>
